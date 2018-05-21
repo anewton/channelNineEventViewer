@@ -11,10 +11,10 @@ A Channel 9 Event RSS feed service interpreter that stores feed data locally and
  - Select a year to begin downloading event data
  - Filter by categories, or by speakers
  - Click on the details button for a presentation to display a summary
- - Click on a media link to display a build in video player <i>(NOTE: The player may stall when beginning playback and has other bugs to be fixed)</i>
+ - Click on a media link to display a built in video player <i>(NOTE: The player may stall when beginning playback and has other bugs to be fixed)</i>
  - Click on a speaker link to navigate to a web page for the speaker
  - Click on a presentation link to navigate to a web page for the even and session
- - Videos can be downloaded to your My Videos directory.  <i>(NOTE: If that default directory location was moved, the code currently may not be able to locate the correct folder.)</i>
+ - Videos can be downloaded to your current Windows user "My Videos" directory.  <i>(NOTE: If that default directory location was moved, the code currently may not be able to locate the correct folder.)</i>
 
 #### Advanced Use
  - Default event configuration, event names, and years (or secondary feed routes), is stored in the file eventData.json.  The file is in the project ChannelNineEventFeed.Data in the Events folder.
