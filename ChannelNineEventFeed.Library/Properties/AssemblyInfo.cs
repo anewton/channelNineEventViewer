@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ChannelNineEventFeed.Library")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("TsugaSoft, LLC")]
+[assembly: AssemblyCompany("Allen Newton")]
 [assembly: AssemblyProduct("ChannelNineEventFeed.Library")]
-[assembly: AssemblyCopyright("Copyright © 2018 TsugaSoft, LLC All rights reserved")]
+[assembly: AssemblyCopyright("Copyright © 2018 Allen Newton All rights reserved")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

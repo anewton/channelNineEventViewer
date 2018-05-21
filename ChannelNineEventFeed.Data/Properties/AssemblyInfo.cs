@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
@@ -8,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ChannelNineEventFeed.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("TsugaSoft, LLC")]
+[assembly: AssemblyCompany("Allen Newton")]
 [assembly: AssemblyProduct("ChannelNineEventFeed.Data")]
-[assembly: AssemblyCopyright("Copyright © 2018 TsugaSoft, LLC All rights reserved")]
+[assembly: AssemblyCopyright("Copyright © 2018 Allen Newton All rights reserved")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
