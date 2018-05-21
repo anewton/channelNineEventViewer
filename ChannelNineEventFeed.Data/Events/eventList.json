@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Build",
+        "years": [
+            "2018",
+            "2017",
+            "2016",
+            "Build-Tour-London-2016",
+            "2015",
+            "2014",
+            "2013",
+            "2012"
+        ]
+    },
+    {
+        "name": "Connect",
+        "years": [
+            "2018",
+            "2017",
+            "2016"
+        ]
+    },
+    {
+        "name": "dotnetConf",
+        "years": [
+            "2017"
+        ]
+    },
+    {
+        "name": "FSharp-Events",
+        "years": [
+            "fsharpConf-2018"
+        ]
+    }
+]

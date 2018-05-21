@@ -1,0 +1,17 @@
+﻿CREATE TABLE IF NOT EXISTS `Video` (
+    `Id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `Created` DATETIME NULL,
+    `LastUpdated` DATETIME NULL,
+	`Title` NVARCHAR(8000) NULL,
+	`SummaryHtml` NVARCHAR(8000) NULL,
+	`Summary` NVARCHAR(8000) NULL,
+	`EventYear` NVARCHAR(200) NOT NULL,
+	`EventName` NVARCHAR(8000) NULL,
+	`DurationSeconds` INTEGER NOT NULL,
+	`PublishDate` DATETIME NULL,
+	`HostedPageLink` NVARCHAR(8000) NULL,
+	`IsVideoViewingComplete` BIT NULL,
+	`MyRatingScore` FLOAT NULL,
+	`SessionCode` NVARCHAR(8000) NULL
+);
+

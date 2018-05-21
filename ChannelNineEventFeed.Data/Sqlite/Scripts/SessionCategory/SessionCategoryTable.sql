@@ -1,0 +1,9 @@
+﻿CREATE TABLE IF NOT EXISTS `SessionCategory` (
+    `Id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `Created` DATETIME NULL,
+    `LastUpdated` DATETIME NULL,
+    `SessionId` INTEGER NOT NULL,
+    `CategoryId` INTEGER NOT NULL
+);
+
+

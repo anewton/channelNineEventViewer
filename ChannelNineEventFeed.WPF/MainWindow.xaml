@@ -1,0 +1,72 @@
+﻿<Window x:Class="ChannelNineEventFeed.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChannelNineEventFeed.WPF"
+        xmlns:controls="clr-namespace:ChannelNineEventFeed.WPF.Controls"
+        mc:Ignorable="d"
+        x:Name="mainWindow"
+        Title="MainWindow" Height="768" Width="1024">
+    <Window.Resources>
+
+
+        <DataGridTemplateColumn x:Key="ViewButtonColumn" MinWidth="100" Header="">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Button Click="ViewDetailsClick">Details</Button>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36" />
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <controls:SpinnerSwirl x:Name="spinner"   HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+        <Grid Grid.Row="1" x:Name="contentGrid">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="36" />
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontFamily="Segoe UI" FontSize="16" Margin="12,0,0,0" FontWeight="Bold" Text="Filters" HorizontalAlignment="Left" />
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True">
+                    <DockPanel>
+                        <controls:FilterControl x:Name="filterControl" Margin="0,0,0,200" />
+                    </DockPanel>
+                </ScrollViewer>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" Text="{Binding PresentationData.Count, ElementName=mainWindow}" />
+                    <TextBlock FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" Text=" Presentations" />
+                </StackPanel>
+                <DataGrid x:Name="dataGrid" Grid.Row="1" CanUserAddRows="False" CanUserSortColumns="True" FontFamily="Segoe UI" FontSize="16" Grid.Column="1" AutoGenerateColumns="False"  >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding EventName}" Header="Event" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding EventYear}" Header="Year" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Title}" Header="Title" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Duration}" Header="Duration" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding SessionType}" Header="Type" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+        <!--<Grid Grid.Row="2" x:Name="buttonGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonGetAll" Content="Init Data" Grid.Column="1" Margin="12" Click="buttonGetAllClick" />
+            <Button x:Name="buttonGetCurrentYear" Content="Refresh" Grid.Column="2" Margin="12" Click="buttonGetCurrentYearClick" />
+            <Button x:Name="buttonNuclearOption" Content="New Database" Margin="12" Click="buttonNuclearOptionClick" Background="Red" HorizontalAlignment="Left" />
+        </Grid>-->
+    </Grid>
+</Window>

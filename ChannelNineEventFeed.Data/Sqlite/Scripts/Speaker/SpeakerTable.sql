@@ -1,0 +1,12 @@
+﻿CREATE TABLE IF NOT EXISTS `Speaker` (
+    `Id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `Created` DATETIME NULL,
+    `LastUpdated` DATETIME NULL,
+    `Name` NVARCHAR(8000) NULL,
+    `Summary` NVARCHAR(8000) NULL,
+    `HostedPageLink` NVARCHAR(8000) NULL,
+    `EventYear` NVARCHAR(200) NOT NULL,
+    `EventName` NVARCHAR(8000) NULL,
+    `PublishDate` DATETIME NULL
+);
+

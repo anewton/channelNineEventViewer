@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelNineEventFeed.Library", "ChannelNineEventFeed.Library\ChannelNineEventFeed.Library.csproj", "{BCCBA8FE-E240-46C0-8363-2EF951780CB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E71DB85-BAAF-4E16-B225-8EEBB8B18C98}"
+	ProjectSection(SolutionItems) = preProject
+		CSharp.ruleset = CSharp.ruleset
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelNineEventFeed.Data", "ChannelNineEventFeed.Data\ChannelNineEventFeed.Data.csproj", "{B627CDCB-BE5B-4B77-9C7E-D484C39E8F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelNineEventFeed.WPF", "ChannelNineEventFeed.WPF\ChannelNineEventFeed.WPF.csproj", "{7D19F373-27C5-4A28-B17F-FEC42FA4819E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCCBA8FE-E240-46C0-8363-2EF951780CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCCBA8FE-E240-46C0-8363-2EF951780CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCCBA8FE-E240-46C0-8363-2EF951780CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCCBA8FE-E240-46C0-8363-2EF951780CB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B627CDCB-BE5B-4B77-9C7E-D484C39E8F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B627CDCB-BE5B-4B77-9C7E-D484C39E8F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B627CDCB-BE5B-4B77-9C7E-D484C39E8F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B627CDCB-BE5B-4B77-9C7E-D484C39E8F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D19F373-27C5-4A28-B17F-FEC42FA4819E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D19F373-27C5-4A28-B17F-FEC42FA4819E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D19F373-27C5-4A28-B17F-FEC42FA4819E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D19F373-27C5-4A28-B17F-FEC42FA4819E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A60C5740-CF39-46FA-BC52-16D1E0C4DF4B}
+	EndGlobalSection
+EndGlobal
