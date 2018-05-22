@@ -223,7 +223,7 @@ namespace ChannelNineEventFeed.Data.Services
                         }
                         else
                         {
-                            //UpdateVideoData(item, videoFeed.MediaType);
+                            UpdateVideoData(item, videoFeed.MediaType);
                         }
 
                         //Speakers
@@ -403,7 +403,7 @@ namespace ChannelNineEventFeed.Data.Services
                         }
                         else
                         {
-                           // UpdateSpeakerData(speaker, item, eventName, year);
+                            UpdateSpeakerData(speaker, item, eventName, year);
                         }
                     }
                     lastItemTitle = feed.Items.Last().Title.Text;

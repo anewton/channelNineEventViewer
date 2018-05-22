@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:ChannelNineEventFeed.WPF.Controls"
         mc:Ignorable="d"
         x:Name="mainWindow"
-        Title="MainWindow" Height="768" Width="1024">
+        Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
 

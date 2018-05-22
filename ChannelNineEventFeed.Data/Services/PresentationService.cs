@@ -163,7 +163,7 @@ namespace ChannelNineEventFeed.Data.Services
                 Finish = !string.IsNullOrEmpty(session.Finish) ? DateTime.Parse(session.Finish) : DateTime.MinValue,
                 Level = session.Level,
                 Link = session.Link,
-                SessionType = session.SessionType == null ? string.Empty : session.SessionType,
+                SessionType = session.SessionType ?? string.Empty,
                 SlidesLink = session.Slides,
                 Starts = !string.IsNullOrEmpty(session.Starts) ? DateTime.Parse(session.Starts) : DateTime.MinValue,
                 Thumbnailimage = session.Thumbnailimage == null ? string.Empty : session.Thumbnailimage.ToString(),

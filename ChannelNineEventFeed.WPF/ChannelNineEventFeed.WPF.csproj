@@ -87,6 +87,7 @@
     <Compile Include="PresentationWindow.xaml.cs">
       <DependentUpon>PresentationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SampleData\PresentationDesignTimeData.cs" />
     <Compile Include="XAMLConverter\CSSStylesheet.cs" />
     <Compile Include="XAMLConverter\HtmlCssParser.cs" />
     <Compile Include="XAMLConverter\HtmlFromXamlConverter.cs" />

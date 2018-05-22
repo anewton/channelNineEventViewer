@@ -3,92 +3,104 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:SampleData="clr-namespace:ChannelNineEventFeed.WPF.SampleData" 
     mc:Ignorable="d" 
     x:Class="ChannelNineEventFeed.WPF.PresentationWindow"
     x:Name="presentationWindow"
-    Title="{Binding Title, Mode=OneTime}" 
-    Height="600" 
-    Width="900"
-    DataContext="{Binding PresentationData, ElementName=presentationWindow}" FontSize="16" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="ToolWindow">
-	<Window.Resources>
-		<Style x:Key="ItemsControlStyle" TargetType="{x:Type ItemsControl}">
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type ItemsControl}">
-						<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<DataTemplate x:Key="ItemsControlItemDataTemplate">
-			<Grid>
-				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top"/>
-			</Grid>
-		</DataTemplate>
-		<DataTemplate x:Key="SpeakersItemsControlItemDataTemplate">
-			<Grid>
-				<Button Content="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Style="{DynamicResource LinkButton}" Tag="{Binding HostedPageLink}" Click="SpeakerNameClicked" Visibility="{Binding HostedPageLink, Converter={StaticResource VisibleIfNotNullConverter}}"/>
-				<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"  FontSize="16" Visibility="{Binding HostedPageLink, Converter={StaticResource VisibleIfNullConverter}}" />
-			</Grid>
-		</DataTemplate>
-		<DataTemplate x:Key="MediaItemsControlItemDataTemplate">
-			<Grid>
+    Height="768" 
+    Width="1024" 
+    DataContext="{Binding Presentation, ElementName=presentationWindow}" FontSize="16" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+    d:DataContext="{d:DesignInstance {x:Type SampleData:PresentationDesignTimeData}, IsDesignTimeCreatable=True}" SizeToContent="Height" 
+    >
+    <Window.Resources>
+        <Style x:Key="ItemsControlStyle" TargetType="{x:Type ItemsControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="ItemsControlItemDataTemplate">
+            <Grid>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="SpeakersItemsControlItemDataTemplate">
+            <Grid>
+                <Button Content="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Style="{DynamicResource LinkButton}" Tag="{Binding HostedPageLink}" Click="SpeakerNameClicked" Visibility="{Binding HostedPageLink, Converter={StaticResource VisibleIfNotNullConverter}}"/>
+                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"  FontSize="16" Visibility="{Binding HostedPageLink, Converter={StaticResource VisibleIfNullConverter}}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MediaItemsControlItemDataTemplate">
+            <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="{Binding MediaType}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Style="{DynamicResource LinkButton}" Tag="{Binding DownloadLink}" Click="MediaClicked" />
-                    <Button Visibility="{Binding IsDownloaded, Converter={StaticResource BoolToVisibilityConverter}}" Content="Play Downloaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Style="{DynamicResource LinkButton}" Tag="{Binding DownloadLink}" Click="PlayDownloadedMediaClicked" />
+                    <Button Visibility="{Binding IsDownloaded, Converter={StaticResource BoolToVisibilityConverter}}" Content="Play Downloaded" HorizontalAlignment="Left" Margin="12,0,0,0" VerticalAlignment="Top" Width="Auto" Style="{DynamicResource LinkButton}" Tag="{Binding DownloadLink}" Click="PlayDownloadedMediaClicked" />
                 </StackPanel>
-				
-			</Grid>
-		</DataTemplate>
-	</Window.Resources>
+
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-    	<Image HorizontalAlignment="Right" VerticalAlignment="Top" Source="{Binding Thumbnailimage}" Width="220" Height="123" Margin="0,12,12,0"/>
-    	<StackPanel Margin="12">
-    		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EventName}" VerticalAlignment="Top" Margin="0,0,-0.001,0" FontSize="16" FontWeight="Bold"/>
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EventYear}" VerticalAlignment="Top" Margin="4,0,0,0" FontSize="16" FontWeight="Bold"/>
-    		</StackPanel>
-    		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Code:" VerticalAlignment="Top" FontSize="16"/>
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Code}" VerticalAlignment="Top" FontSize="16" Margin="6,0,0,0"/>
-    		</StackPanel>
-    		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Level:" VerticalAlignment="Top" FontSize="16"/>
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Level}" VerticalAlignment="Top" FontSize="16" Margin="6,0,0,0"/>
-    		</StackPanel>
-    		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Type:" VerticalAlignment="Top" FontSize="16"/>
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SessionType}" VerticalAlignment="Top" FontSize="16" Margin="6,0,0,0"/>
-    		</StackPanel>
-    		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
-    			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Link:" VerticalAlignment="Top" FontSize="16"/>
-    			<Button Click="PageLinkClicked" Content="{Binding Link}" Style="{DynamicResource LinkButton}" Margin="6,0,0,0" FontSize="16"/>
-    		</StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="406*"/>
+            <ColumnDefinition Width="41*"/>
+        </Grid.ColumnDefinitions>
+        <Image HorizontalAlignment="Right" VerticalAlignment="Top" Source="{Binding Thumbnailimage}" Width="220" Height="123" Margin="0,12,12,0" Grid.ColumnSpan="2"/>
+        <StackPanel Margin="12" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" Margin="0" FontSize="16" FontWeight="Bold" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EventName}" VerticalAlignment="Top" Margin="0" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EventYear}" VerticalAlignment="Top" Margin="4,0,0,0" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Code:" VerticalAlignment="Top" FontSize="16"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Code}" VerticalAlignment="Top" FontSize="16" Margin="6,0,0,0"/>
+            </StackPanel>
+            <StackPanel Visibility="{Binding Level, Converter={StaticResource VisibleIfNotNullConverter}}"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Level:" VerticalAlignment="Top" FontSize="16"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Level}" VerticalAlignment="Top" FontSize="16" Margin="6,0,0,0"/>
+            </StackPanel>
+            <StackPanel Visibility="{Binding SessionType, Converter={StaticResource VisibleIfNotNullConverter}}"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Type:" VerticalAlignment="Top" FontSize="16"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SessionType}" VerticalAlignment="Top" FontSize="16" Margin="6,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Link:" VerticalAlignment="Top" FontSize="16"/>
+                <Button Click="PageLinkClicked" Content="{Binding Link}" Style="{DynamicResource LinkButton}" Margin="6,0,0,0" FontSize="16"/>
+            </StackPanel>
             <StackPanel Visibility="{Binding SlidesLink, Converter={StaticResource VisibleIfNotNullConverter}}" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,3,0,0">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Slides:" VerticalAlignment="Top" FontSize="16"/>
                 <Button Content="{Binding SlidesLink}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Style="{DynamicResource LinkButton}" Click="SlidesClicked"  Margin="6,0,0,0" FontSize="16" />
             </StackPanel>
-            <StackPanel>
-                
+            <FlowDocumentScrollViewer x:Name="flowDocReader" Document="{Binding FlowDocDescription}" VerticalScrollBarVisibility="Auto" IsToolBarVisible="False"  Focusable="False" MaxZoom="100" MinZoom="100" FontFamily="Segoe UI" FontSize="16" HorizontalAlignment="Stretch"   VerticalAlignment="Top" Margin="12,12,11.6,0" Grid.ColumnSpan="2" />
+            <StackPanel Margin="12,12,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock TextWrapping="Wrap" Text="Categories" FontSize="16" VerticalAlignment="Top"  TextDecorations="Underline"/>
+                    <ItemsControl HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,12" ItemsSource="{Binding Categories}" Style="{DynamicResource ItemsControlStyle}" ItemTemplate="{DynamicResource ItemsControlItemDataTemplate}"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12,0,0,0">
+                    <TextBlock TextWrapping="Wrap" Text="Speakers" FontSize="16" VerticalAlignment="Top"  TextDecorations="Underline"/>
+                    <ItemsControl 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="0,6,0,12"
+                    ItemsSource="{Binding Speakers}" Style="{DynamicResource ItemsControlStyle}" 
+                    ItemTemplate="{DynamicResource SpeakersItemsControlItemDataTemplate}"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12,0,0,0">
+                    <TextBlock TextWrapping="Wrap" Text="Media" FontSize="16" VerticalAlignment="Top"  TextDecorations="Underline"/>
+                    <ItemsControl HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,12" ItemsSource="{Binding Media}" Style="{DynamicResource ItemsControlStyle}" ItemTemplate="{DynamicResource MediaItemsControlItemDataTemplate}"/>
+                </StackPanel>
             </StackPanel>
-    	</StackPanel>
-    	<!--<TextBlock TextWrapping="Wrap" Text="{Binding Description}" FontSize="16" VerticalAlignment="Top" Margin="12,146,12,0" Height="200"/>-->
-        <FlowDocumentScrollViewer x:Name="flowDocReader" VerticalScrollBarVisibility="Auto" IsToolBarVisible="False"  Focusable="False" MaxZoom="100" MinZoom="100" FontFamily="Segoe UI" FontSize="16" HorizontalAlignment="Stretch" Height="200"  VerticalAlignment="Top" Margin="12,160,12,0" ></FlowDocumentScrollViewer>
-    	<StackPanel Margin="12,340,12,12" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-    		<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-    			<TextBlock TextWrapping="Wrap" Text="Categories" FontSize="16" VerticalAlignment="Top"  TextDecorations="Underline"/>
-    			<ItemsControl HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,12" ItemsSource="{Binding Categories}" Style="{DynamicResource ItemsControlStyle}" ItemTemplate="{DynamicResource ItemsControlItemDataTemplate}"/>
-    		</StackPanel>
-    		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12,0,0,0">
-    			<TextBlock TextWrapping="Wrap" Text="Speakers" FontSize="16" VerticalAlignment="Top"  TextDecorations="Underline"/>
-    			<ItemsControl HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,12" ItemsSource="{Binding Speakers}" Style="{DynamicResource ItemsControlStyle}" ItemTemplate="{DynamicResource SpeakersItemsControlItemDataTemplate}"/>
-    		</StackPanel>
-    		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="12,0,0,0">
-    			<TextBlock TextWrapping="Wrap" Text="Media" FontSize="16" VerticalAlignment="Top"  TextDecorations="Underline"/>
-    			<ItemsControl HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,12" ItemsSource="{Binding Media}" Style="{DynamicResource ItemsControlStyle}" ItemTemplate="{DynamicResource MediaItemsControlItemDataTemplate}"/>
-    		</StackPanel>
-    	</StackPanel>
+        </StackPanel>
+        
+        
     </Grid>
 </Window>
