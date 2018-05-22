@@ -46,7 +46,7 @@ namespace ChannelNineEventFeed.Library.Models
         public string Level { get; set; }
 
         [JsonProperty("track")]
-        public object Track { get; set; }
+        public string Track { get; set; }
 
         [JsonProperty("sessionType")]
         public string SessionType { get; set; }
@@ -64,10 +64,10 @@ namespace ChannelNineEventFeed.Library.Models
         public bool Notrecorded { get; set; }
 
         [JsonProperty("previewimage")]
-        public object Previewimage { get; set; }
+        public string Previewimage { get; set; }
 
         [JsonProperty("thumbnailimage")]
-        public object Thumbnailimage { get; set; }
+        public string Thumbnailimage { get; set; }
 
         [JsonProperty("video")]
         public string Video { get; set; }

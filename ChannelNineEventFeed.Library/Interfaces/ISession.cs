@@ -19,7 +19,7 @@ namespace ChannelNineEventFeed.Library.Interfaces
         string Mp4med { get; set; }
         bool Notrecorded { get; set; }
         bool Prerecorded { get; set; }
-        object Previewimage { get; set; }
+        string Previewimage { get; set; }
         string Room { get; set; }
         string SessionType { get; set; }
         string Slides { get; set; }
@@ -27,9 +27,9 @@ namespace ChannelNineEventFeed.Library.Interfaces
         IList<string> Speakerids { get; set; }
         string Starts { get; set; }
         IList<string> Tags { get; set; }
-        object Thumbnailimage { get; set; }
+        string Thumbnailimage { get; set; }
         string Title { get; set; }
-        object Track { get; set; }
+        string Track { get; set; }
         string Video { get; set; }
         string Wmv { get; set; }
         string Wmvhq { get; set; }
