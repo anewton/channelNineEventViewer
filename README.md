@@ -13,7 +13,7 @@ A Channel 9 Event RSS feed service interpreter that stores feed data locally and
  - Click on the details button for a presentation to display a summary
  - Click on a media link to display a built in video player <i>(NOTE: The player may stall when beginning playback and has other bugs to be fixed)</i>
  - Click on a speaker link to navigate to a web page for the speaker
- - Click on a presentation link to navigate to a web page for the even and session
+ - Click on a presentation link to navigate to a web page for the event and session
  - Videos can be downloaded to your current Windows user "My Videos" directory.  <i>(NOTE: If that default directory location was moved, the code currently may not be able to locate the correct folder.)</i>
 
 #### Advanced Use
