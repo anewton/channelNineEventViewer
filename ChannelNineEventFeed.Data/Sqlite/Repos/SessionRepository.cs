@@ -107,9 +107,9 @@ namespace ChannelNineEventFeed.Data.Sqlite.Repos
                     {
                         query = query.Where<PresentationMetaData>(p => filters.SessionTypes.Contains(p.SessionType));
                     }
-                    if (filters.CategorIds != null && filters.CategorIds.Count > 0)
+                    if (filters.CategoryIds != null && filters.CategoryIds.Count > 0)
                     {
-                        query = query.Where<PresentationMetaData>(p => filters.CategorIds.Contains(p.CategoryId));
+                        query = query.Where<PresentationMetaData>(p => filters.CategoryIds.Contains(p.CategoryId));
                     }
                     //if (filters.SpeakerIds != null && filters.SpeakerIds.Count > 0)
                     //{

@@ -97,6 +97,7 @@ namespace ChannelNineEventFeed.WPF
             {
                 ThreadStart method = new ThreadStart(() =>
                 {
+                    PresentationData = null;
                     dataGrid.ItemsSource = null;
                 });
                 Dispatcher.BeginInvoke(DispatcherPriority.Input, method);

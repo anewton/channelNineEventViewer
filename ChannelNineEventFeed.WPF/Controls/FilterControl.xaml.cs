@@ -6,11 +6,14 @@ using ChannelNineEventFeed.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
+using System.Xml;
 
 namespace ChannelNineEventFeed.WPF.Controls
 {
@@ -46,38 +49,10 @@ namespace ChannelNineEventFeed.WPF.Controls
         private void FilterChanged(object sender, Tuple<FilterType, List<object>> e)
         {
             Filtering?.Invoke(this, null);
-
             Application.Current.Dispatcher.Invoke(async () =>
             {
                 await Task.Run(() => FilterPresentations(e));
             });
-
-            //// The Event filter was cleared
-            //if (e.Item1 == FilterType.Event && e.Item2.Count() == 0)
-            //{
-            //    RemoveFilterControls(new List<FilterType>() { FilterType.Category, FilterType.SessionType, FilterType.Level, FilterType.Year });
-            //}
-
-            //// At least one Event was selected
-            //if (e.Item1 == FilterType.Event && e.Item2.Count() > 0)
-            //{
-            //    RemoveFilterControls(new List<FilterType>() { FilterType.Category, FilterType.SessionType, FilterType.Level, FilterType.Year });
-
-            //    // Add Year Filter
-            //    var selectedEvent = _feedService.GetEvents().Where(x => x.Name == e.Item2[0].ToString()).FirstOrDefault();
-            //    var yearsFilterControl = new FilterSelectors(FilterType.Year, selectedEvent.Years);
-            //    yearsFilterControl.FilterChanged += FilterChanged;
-            //    filterControlContainer.Children.Add(yearsFilterControl);
-            //}
-
-            //// Event and Year filters exist and both have at least one selected value
-            //if (e.Item1 == FilterType.Year && e.Item2.Count() > 0 && ContainsFilterControlTypes(new List<FilterType>() { FilterType.Event, FilterType.Year }))
-            //{
-            //    // Add Category Filter
-            //    var categoriesFilterControl = new FilterSelectors(FilterType.Category, _presentationService.GetFilteredCategories(Filters));
-            //    categoriesFilterControl.FilterChanged += FilterChanged;
-            //    filterControlContainer.Children.Add(categoriesFilterControl);
-            //}
         }
 
         private bool ContainsFilterControlTypes(List<FilterType> filterTypes)
@@ -86,59 +61,27 @@ namespace ChannelNineEventFeed.WPF.Controls
             {
                 var result = false;
 
-                if (filterControlContainer.Children.Count > 1)
+                //if (filterControlContainer.Children.Count > 2)
+                //{
+                var countOfFiltersFound = 0;
+                foreach (FilterSelectors filterSelector in filterControlContainer.Children)
                 {
-                    var countOfFiltersFound = 0;
-                    foreach (FilterSelectors filterSelector in filterControlContainer.Children)
+                    if (filterTypes.Contains(filterSelector.FilterBy) && filterSelector.HasValue())
                     {
-                        if (filterTypes.Contains(filterSelector.FilterBy) /*&& filterSelector.HasValue()*/)
-                        {
-                            countOfFiltersFound++;
-                        }
+                        result = true;
+                        countOfFiltersFound++;
                     }
-                    result = countOfFiltersFound == filterTypes.Count();
+                    else
+                    {
+                        result = false;
+                        break;
+                    }
                 }
+                result = countOfFiltersFound == filterTypes.Count();
+                //}
                 return result;
             }));
             return containsFilterTypes;
-        }
-
-        private void RemoveFilterControls(List<FilterType> filterTypes)
-        {
-            //if (filterControlContainer.Children.Count > 1)
-            //{
-            //    var filterSelectorsToRemove = new List<FilterSelectors>();
-            //    foreach (FilterSelectors filterSelector in filterControlContainer.Children)
-            //    {
-            //        if (filterSelector.FilterBy != FilterType.Event && filterTypes.Contains(filterSelector.FilterBy))
-            //        {
-            //            filterSelectorsToRemove.Add(filterSelector);
-            //        }
-            //    }
-            //    foreach (var filterSelector in filterSelectorsToRemove)
-            //    {
-            //        filterControlContainer.Children.Remove(filterSelector);
-            //    }
-            //}
-
-            Dispatcher.Invoke(() =>
-            {
-                if (filterControlContainer.Children.Count > 1)
-                {
-                    var filterSelectorsToRemove = new List<FilterSelectors>();
-                    foreach (FilterSelectors filterSelector in filterControlContainer.Children)
-                    {
-                        if (filterSelector.FilterBy != FilterType.Event && filterTypes.Contains(filterSelector.FilterBy))
-                        {
-                            filterSelectorsToRemove.Add(filterSelector);
-                        }
-                    }
-                    foreach (var filterSelector in filterSelectorsToRemove)
-                    {
-                        filterControlContainer.Children.Remove(filterSelector);
-                    }
-                }
-            });
         }
 
         private void FilterPresentations(Tuple<FilterType, List<object>> e)
@@ -151,15 +94,18 @@ namespace ChannelNineEventFeed.WPF.Controls
             switch (e.Item1)
             {
                 case FilterType.Event:
+                    if (e.Item2 == null || e.Item2.Count == 0)
+                    {
+                        ClearAllOtherFilters();
+                    }
                     Filters.EventNames = new List<string>();
                     foreach (var filter in e.Item2)
                     {
                         Filters.EventNames.Add(filter.ToString());
                     }
-
                     break;
                 case FilterType.Year:
-                    Filters.EventYears = new List<string>();
+                    ClearAllOtherFilters();
                     foreach (var filter in e.Item2)
                     {
                         Filters.EventYears.Add(filter.ToString());
@@ -173,17 +119,21 @@ namespace ChannelNineEventFeed.WPF.Controls
                     }
                     break;
                 case FilterType.Category:
-                    Filters.CategorIds = new List<int>();
+                    Filters.CategoryIds = new List<int>();
+                    Filters.CategoryNames = new List<string>();
                     foreach (var filter in e.Item2)
                     {
-                        Filters.CategorIds.Add((filter as Category).Id);
+                        Filters.CategoryIds.Add((filter as Category).Id);
+                        Filters.CategoryNames.Add((filter as Category).Name);
                     }
                     break;
                 case FilterType.Speaker:
                     Filters.SpeakerIds = new List<int>();
+                    Filters.SpeakerNames = new List<string>();
                     foreach (var filter in e.Item2)
                     {
                         Filters.SpeakerIds.Add((filter as Speaker).Id);
+                        Filters.SpeakerNames.Add((filter as Speaker).Name);
                     }
                     break;
             }
@@ -196,12 +146,21 @@ namespace ChannelNineEventFeed.WPF.Controls
             {
                 presentations = _presentationService.GetFilteredPresentations(Filters).ToList();
             }
-
-            AddFilterControls(e);
+            UpdateFilterControls(e);
+            UpdateSelectedFiltersIndicator();
             FilterComplete?.Invoke(presentations);
         }
 
-        private void AddFilterControls(Tuple<FilterType, List<object>> e)
+        private void ClearAllOtherFilters()
+        {
+            Filters.EventYears = new List<string>();
+            Filters.CategoryIds = new List<int>();
+            Filters.CategoryNames = new List<string>();
+            Filters.SpeakerIds = new List<int>();
+            Filters.SpeakerNames = new List<string>();
+        }
+
+        private void UpdateFilterControls(Tuple<FilterType, List<object>> e)
         {
             // The Event filter was cleared
             if (e.Item1 == FilterType.Event && e.Item2.Count() == 0)
@@ -219,16 +178,22 @@ namespace ChannelNineEventFeed.WPF.Controls
             if (e.Item1 == FilterType.Event && e.Item2.Count() > 0)
             {
                 RemoveFilterControls(new List<FilterType>() { FilterType.Category, FilterType.SessionType, FilterType.Speaker, FilterType.Year });
-
                 // Add Year filter selector
-                var selectedEvent = _feedService.GetEvents().Where(x => x.Name == e.Item2[0].ToString()).FirstOrDefault();
-
-                Application.Current.Dispatcher.Invoke(() =>
+                var yearValues = new List<string>();
+                foreach (var item in e.Item2)
                 {
-                    var yearsFilterControl = new FilterSelectors(FilterType.Year, selectedEvent.Years);
-                    yearsFilterControl.FilterChanged += FilterChanged;
-                    filterControlContainer.Children.Add(yearsFilterControl);
-                });
+                    var selectedEvent = _feedService.GetEvents().Where(x => x.Name == item.ToString()).FirstOrDefault();
+                    yearValues.AddRange(selectedEvent.Years);
+                }
+                if (yearValues.Count > 0)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        var yearsFilterControl = new FilterSelectors(FilterType.Year, yearValues);
+                        yearsFilterControl.FilterChanged += FilterChanged;
+                        filterControlContainer.Children.Add(yearsFilterControl);
+                    });
+                }
             }
 
             // Add or update other filters
@@ -300,6 +265,50 @@ namespace ChannelNineEventFeed.WPF.Controls
                     });
                 }
             }
+        }
+
+        private void RemoveFilterControls(List<FilterType> filterTypes)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (filterControlContainer.Children.Count > 1)
+                {
+                    var filterSelectorsToRemove = new List<FilterSelectors>();
+                    foreach (FilterSelectors filterSelector in filterControlContainer.Children)
+                    {
+                        if (filterSelector.FilterBy != FilterType.Event && filterTypes.Contains(filterSelector.FilterBy))
+                        {
+                            filterSelectorsToRemove.Add(filterSelector);
+                        }
+                    }
+                    foreach (var filterSelector in filterSelectorsToRemove)
+                    {
+                        filterControlContainer.Children.Remove(filterSelector);
+                    }
+                }
+            });
+        }
+
+        private void UpdateSelectedFiltersIndicator()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                TextBlock textBlockToReplace = null;
+                foreach (var item in controlsGrid.Children)
+                {
+                    if (item is TextBlock && ((TextBlock)item).Name == "selectedFiltersIndicator")
+                    {
+                        textBlockToReplace = (TextBlock)item;
+                    }
+                }
+                controlsGrid.Children.Remove(textBlockToReplace);
+                if (Filters.HasAtLeastOneFilter())
+                {
+                    string xaml = "<TextBlock xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' x:Name='selectedFiltersIndicator' HorizontalAlignment='Left' TextWrapping='Wrap' Margin='12,0,0,6' >{0}</TextBlock>";
+                    var logicSummaryTextBlock = (TextBlock)XamlReader.Load(new XmlTextReader(new StringReader(string.Format(xaml, "Logic Summary:    " + Filters.GetXamlToString()))));
+                    controlsGrid.Children.Add(logicSummaryTextBlock);
+                }
+            });
         }
 
         private FilterSelectors FindFilterSelectorByFilterType(FilterType filterType)

@@ -4,7 +4,7 @@ namespace ChannelNineEventFeed.Library.Interfaces
 {
     public interface IEventFilters
     {
-        List<int> CategorIds { get; set; }
+        List<int> CategoryIds { get; set; }
         List<string> EventNames { get; set; }
         List<string> EventYears { get; set; }
         List<string> Levels { get; set; }

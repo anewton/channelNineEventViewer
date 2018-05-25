@@ -19,10 +19,16 @@ namespace ChannelNineEventFeed.Data.Sqlite.Repos
 
         public ICategory Add(ICategory entity)
         {
+            var existingCategory = FindByName(entity.Name);
+            if (existingCategory != null)
+            {
+                return existingCategory;
+            }
             using (var conn = new SQLiteConnection(Database.DatabasePath))
             {
                 using (var context = new DatabaseContext(conn))
                 {
+
                     context.Category.Add((Category)entity);
                     context.SaveChanges();
                 }
@@ -53,7 +59,7 @@ namespace ChannelNineEventFeed.Data.Sqlite.Repos
             {
                 using (var context = new DatabaseContext(conn))
                 {
-                    result = context.Category.FirstOrDefault(x => x.Name == name);
+                    result = context.Category.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
                 }
             }
             return result;

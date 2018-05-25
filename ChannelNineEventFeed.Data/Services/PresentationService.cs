@@ -35,7 +35,7 @@ namespace ChannelNineEventFeed.Data.Services
         {
             IEnumerable<ICategory> result = null;
             // Remove any category filters first
-            filters.CategorIds = new List<int>();
+            filters.CategoryIds = new List<int>();
             var filteredSessionIds = _sessionRepository.FilterSessions(filters);
             if (filteredSessionIds != null)
             {
