@@ -77,6 +77,7 @@
     <Compile Include="Interfaces\IDatabaseInitializer.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\Repos\IQueuedPresentationRepository.cs" />
     <Compile Include="Interfaces\Repos\IVideoRepository.cs" />
     <Compile Include="Interfaces\Repos\ISpeakerVideoRepository.cs" />
     <Compile Include="Interfaces\Repos\ISpeakerRepository.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Sqlite\DatabaseInitializer.cs" />
     <Compile Include="Sqlite\Repos\CategoryRepository.cs" />
     <Compile Include="Sqlite\Repos\MediaRepository.cs" />
+    <Compile Include="Sqlite\Repos\QueuedPresentationRepository.cs" />
     <Compile Include="Sqlite\Repos\SessionCategoryRepository.cs" />
     <Compile Include="Sqlite\Repos\SessionRepository.cs" />
     <Compile Include="Sqlite\Repos\SpeakerRepository.cs" />
@@ -119,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sqlite\Scripts\Media\MediaTable.sql" />
+    <Content Include="Sqlite\Scripts\QueuedPresentation\QueuedPresentation.sql" />
     <Content Include="Sqlite\Scripts\SessionCategory\SessionCategoryTable.sql" />
     <Content Include="Sqlite\Scripts\Session\SessionTable.sql" />
     <Content Include="Sqlite\Scripts\SpeakerVideo\SpeakerVideoTable.sql" />

@@ -13,6 +13,7 @@ namespace ChannelNineEventFeed.Data.Sqlite
         public static readonly CreateTables Video = new CreateTables(Create.VideoTable, 5);
         public static readonly CreateTables SessionCategory = new CreateTables(Create.SessionCategoryTable, 6);
         public static readonly CreateTables SpeakerVideo = new CreateTables(Create.SpeakerVideoTable, 7);
+        public static readonly CreateTables QueuedPresentation = new CreateTables(Create.QueuedPresentation, 8);
 
         private static List<CreateTables> AllScripts;
 

@@ -21,6 +21,7 @@ namespace ChannelNineEventFeed.Data
             builder.RegisterType<Sqlite.Repos.SpeakerRepository>().As<ISpeakerRepository>();
             builder.RegisterType<Sqlite.Repos.SpeakerVideoRepository>().As<ISpeakerVideoRepository>();
             builder.RegisterType<Sqlite.Repos.VideoRepository>().As<IVideoRepository>();
+            builder.RegisterType<Sqlite.Repos.QueuedPresentationRepository>().As<IQueuedPresentationRepository>();
 
             // Services
             builder.RegisterType<EventService>().As<IEventService>();

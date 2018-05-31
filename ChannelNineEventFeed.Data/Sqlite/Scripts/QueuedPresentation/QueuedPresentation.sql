@@ -1,0 +1,7 @@
+﻿CREATE TABLE IF NOT EXISTS `QueuedPresentation` (
+    `Id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `Created` DATETIME NULL,
+    `LastUpdated` DATETIME NULL,
+    `Title` NVARCHAR(256) NULL,
+    `OrderIndex` INTEGER NOT NULL
+);

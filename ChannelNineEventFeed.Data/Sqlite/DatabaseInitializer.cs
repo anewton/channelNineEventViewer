@@ -18,9 +18,17 @@ namespace ChannelNineEventFeed.Data.Sqlite
             var databaseExists = await Database.DatabaseExists();
             if (!databaseExists)
             {
-                //create database file and run create scripts
+                // Create database file and run create scripts
                 var fileCreated = await Database.CreateDatabase();
             }
+            var databaseObjectsCreated = await Database.CreateDatabaseObjects();
+        }
+
+        public async Task RecreateDatabase(string databaseName)
+        {
+            Database.DbName = databaseName;
+            // Create database file and run create scripts
+            var fileCreated = await Database.CreateDatabase();         
             var databaseObjectsCreated = await Database.CreateDatabaseObjects();
         }
     }

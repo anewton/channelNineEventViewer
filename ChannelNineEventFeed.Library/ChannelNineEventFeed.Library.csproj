@@ -53,6 +53,7 @@
     <Compile Include="Interfaces\IDataEntity.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
     <Compile Include="Interfaces\IEventFilters.cs" />
+    <Compile Include="Interfaces\IQueuedPresentation.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DataEntity.cs" />
     <Compile Include="Interfaces\ICategory.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Models\Presentation.cs" />
     <Compile Include="Models\PresentationMetaData.cs" />
     <Compile Include="Models\PropertyMetaData.cs" />
+    <Compile Include="Models\QueuedPresentation.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Models\SessionCategory.cs" />
     <Compile Include="Models\Speaker.cs" />

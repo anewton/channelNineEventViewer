@@ -8,70 +8,70 @@ using System.Linq;
 
 namespace ChannelNineEventFeed.Data.Sqlite.Repos
 {
-    public class CategoryRepository : ICategoryRepository
+    public class QueuedPresentationRepository : IQueuedPresentationRepository
     {
-        public CategoryRepository(IDatabase database)
+        public QueuedPresentationRepository(IDatabase database)
         {
             Database = database;
         }
 
         public IDatabase Database { get; set; }
 
-        public ICategory Add(ICategory entity)
+        public IQueuedPresentation Add(IQueuedPresentation entity)
         {
-            var existingCategory = FindByName(entity.Name);
-            if (existingCategory != null)
+            var existing = FindByTitle(entity.Title);
+            if (existing != null)
             {
-                return existingCategory;
+                return existing;
             }
             using (var conn = new SQLiteConnection(Database.DatabasePath))
             {
                 using (var context = new DatabaseContext(conn))
                 {
-                    context.Category.Add((Category)entity);
+                    context.QueuedPresentation.Add((QueuedPresentation)entity);
                     context.SaveChanges();
                 }
             }
             return entity;
         }
 
-        public void Update(ICategory entity)
+        public void Update(IQueuedPresentation entity)
         {
             using (var conn = new SQLiteConnection(Database.DatabasePath))
             {
                 using (var context = new DatabaseContext(conn))
                 {
-                    var category = context.Category.FirstOrDefault(x => x.Id == entity.Id);
-                    if (category != null)
+                    var queuedPresentation = context.QueuedPresentation.FirstOrDefault(x => x.Id == entity.Id);
+                    if (queuedPresentation != null)
                     {
-                        context.Entry(category).CurrentValues.SetValues(entity);
+                        context.Entry(queuedPresentation).CurrentValues.SetValues(entity);
                         context.SaveChanges();
                     }
                 }
             }
         }
 
-        public ICategory FindByName(string name)
+        public IQueuedPresentation FindByTitle(string title)
         {
-            ICategory result = null;
+            IQueuedPresentation result = null;
             using (var conn = new SQLiteConnection(Database.DatabasePath))
             {
                 using (var context = new DatabaseContext(conn))
                 {
-                    result = context.Category.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+                    result = context.QueuedPresentation.FirstOrDefault(x => x.Title.ToLower() == title.ToLower());
                 }
             }
             return result;
         }
 
-        public IEnumerable<ICategory> GetCategoriesInSessionCategoryIdList(IEnumerable<int> sessionCategoryIds)
+        public IEnumerable<IQueuedPresentation> GetOrderedQueue()
         {
-            IEnumerable<ICategory> result = null;
+            IEnumerable<IQueuedPresentation> result = null;
             using (var conn = new SQLiteConnection(Database.DatabasePath))
             {
                 using (var context = new DatabaseContext(conn))
                 {
-                    result = context.Category.Where(x => sessionCategoryIds.Contains(x.Id)).ToList();
+                    result = context.QueuedPresentation.OrderBy(x => x.OrderIndex).ToList();
                 }
             }
             return result;

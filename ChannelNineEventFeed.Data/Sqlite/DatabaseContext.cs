@@ -10,9 +10,9 @@ namespace ChannelNineEventFeed.Data.Sqlite
         public DatabaseContext(SQLiteConnection connection) //: // base(connection, true)
            : base(
                 new SQLiteConnection()
-        {
-            ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = connection.ConnectionString, ForeignKeys = true }.ConnectionString
-            }, true)
+                {
+                    ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = connection.ConnectionString, ForeignKeys = true }.ConnectionString
+                }, true)
         {
             System.Data.Entity.Database.SetInitializer<DatabaseContext>(null);
         }
@@ -24,6 +24,7 @@ namespace ChannelNineEventFeed.Data.Sqlite
         public DbSet<Speaker> Speaker { get; set; }
         public DbSet<SpeakerVideo> SpeakerVideo { get; set; }
         public DbSet<Video> Video { get; set; }
+        public DbSet<QueuedPresentation> QueuedPresentation { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

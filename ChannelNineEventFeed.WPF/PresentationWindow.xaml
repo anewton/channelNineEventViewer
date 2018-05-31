@@ -47,11 +47,12 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="406*"/>
-            <ColumnDefinition Width="41*"/>
+            <ColumnDefinition Width="286*"/>
+            <ColumnDefinition Width="176*"/>
+            <ColumnDefinition Width="47*"/>
         </Grid.ColumnDefinitions>
-        <Image HorizontalAlignment="Right" VerticalAlignment="Top" Source="{Binding Thumbnailimage}" Width="220" Height="123" Margin="0,12,12,0" Grid.ColumnSpan="2"/>
-        <StackPanel Margin="12" Grid.ColumnSpan="2">
+        <Image HorizontalAlignment="Right" VerticalAlignment="Top" Source="{Binding Thumbnailimage}" Width="220" Height="123" Margin="0,12,11.6,0" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <StackPanel Margin="12,12,11.6,12.4" Grid.ColumnSpan="3">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" Margin="0" FontSize="16" FontWeight="Bold" />
                 <StackPanel Orientation="Horizontal">
@@ -100,7 +101,7 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        
-        
+
+
     </Grid>
 </Window>

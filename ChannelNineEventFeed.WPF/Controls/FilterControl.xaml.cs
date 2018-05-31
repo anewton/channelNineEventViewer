@@ -33,7 +33,7 @@ namespace ChannelNineEventFeed.WPF.Controls
 
         public EventFilters Filters { get; set; }
 
-        public void InitEvenFilter()
+        public void InitEventFilter()
         {
             _feedService = ((App)Application.Current).AppContainer.Resolve<IFeedService>();
             _presentationService = ((App)Application.Current).AppContainer.Resolve<IPresentationService>();
@@ -45,6 +45,14 @@ namespace ChannelNineEventFeed.WPF.Controls
             eventNameFilterControl.FilterChanged += FilterChanged;
             filterControlContainer.Children.Add(eventNameFilterControl);
         }
+
+        public void Reset()
+        {
+            Filters = new EventFilters();
+            RemoveAllFilterControls();
+            UpdateSelectedFiltersIndicator();
+        }
+
 
         private void FilterChanged(object sender, Tuple<FilterType, List<object>> e)
         {
@@ -60,9 +68,6 @@ namespace ChannelNineEventFeed.WPF.Controls
             var containsFilterTypes = Dispatcher.Invoke(new Func<bool>(() =>
             {
                 var result = false;
-
-                //if (filterControlContainer.Children.Count > 2)
-                //{
                 var countOfFiltersFound = 0;
                 foreach (FilterSelectors filterSelector in filterControlContainer.Children)
                 {
@@ -78,7 +83,6 @@ namespace ChannelNineEventFeed.WPF.Controls
                     }
                 }
                 result = countOfFiltersFound == filterTypes.Count();
-                //}
                 return result;
             }));
             return containsFilterTypes;
@@ -265,6 +269,25 @@ namespace ChannelNineEventFeed.WPF.Controls
                     });
                 }
             }
+        }
+
+        private void RemoveAllFilterControls()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (filterControlContainer.Children.Count > 1)
+                {
+                    var filterSelectorsToRemove = new List<FilterSelectors>();
+                    foreach (FilterSelectors filterSelector in filterControlContainer.Children)
+                    {
+                        filterSelectorsToRemove.Add(filterSelector);
+                    }
+                    foreach (var filterSelector in filterSelectorsToRemove)
+                    {
+                        filterControlContainer.Children.Remove(filterSelector);
+                    }
+                }
+            });
         }
 
         private void RemoveFilterControls(List<FilterType> filterTypes)

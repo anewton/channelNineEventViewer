@@ -6,5 +6,6 @@ namespace ChannelNineEventFeed.Data.Interfaces
     {
         IDatabase Database { get; set; }
         Task InitDatabase(string databaseName);
+        Task RecreateDatabase(string databaseName);
     }
 }

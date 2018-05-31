@@ -98,6 +98,15 @@ namespace ChannelNineEventFeed.Data.Sqlite.Scripts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string QueuedPresentation {
+            get {
+                return ResourceManager.GetString("QueuedPresentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `SessionCategory` (
         ///    `Id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         ///    `Created` DATETIME NULL,
@@ -118,6 +127,7 @@ namespace ChannelNineEventFeed.Data.Sqlite.Scripts {
         /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `Session` (
         ///    `Id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///    `SessionId` NVARCHAR(1000) NULL,
         ///    `Created` DATETIME NULL,
         ///    `LastUpdated` DATETIME NULL,
         ///    `EventYear` NVARCHAR(200) NOT NULL,
@@ -126,11 +136,9 @@ namespace ChannelNineEventFeed.Data.Sqlite.Scripts {
         ///    `Finish` NVARCHAR(8000) NULL,
         ///    `Title` NVARCHAR(8000) NULL,
         ///    `Description` NVARCHAR(8000) NULL,
-        ///    `Speakerids` NVARCHAR(max) NULL,
+        ///    `Speakerids` NVARCHAR(8000) NULL,
         ///    `Link` NVARCHAR(8000) NULL,
-        ///    `Slides` NVARCHAR(8000) NULL,
-        ///    `Tags` NVARCHAR(max) NULL,
-        /// [rest of string was truncated]&quot;;.
+        ///    `Slides` NVARCHAR [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SessionTable {
             get {
@@ -191,7 +199,7 @@ namespace ChannelNineEventFeed.Data.Sqlite.Scripts {
         ///	`HostedPageLink` NVARCHAR(8000) NULL,
         ///	`IsVideoViewingComplete` BIT NULL,
         ///	`MyRatingScore` FLOAT NULL,
-        ///	`SessionCod [rest of string was truncated]&quot;;.
+        ///	`Sess [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VideoTable {
             get {
