@@ -15,8 +15,9 @@ namespace ChannelNineEventFeed.WPF.Controls
         public void Start(string message)
         {
             textMessage.Text = message;
-            var spinnerStoryboard = FindResource("spinner") as Storyboard;
-            spinnerStoryboard.Begin();
+            //var spinnerStoryboard = FindResource("spinner") as Storyboard;
+            //spinnerStoryboard.Begin();
+            progressRing.IsActive = true;
             infoGrid.Visibility = Visibility.Visible;
         }
 
@@ -33,8 +34,9 @@ namespace ChannelNineEventFeed.WPF.Controls
         private void StopSpinner()
         {
             textMessage.Text = string.Empty;
-            var spinnerStoryboard = FindResource("spinner") as Storyboard;
-            spinnerStoryboard.Stop();
+            //var spinnerStoryboard = FindResource("spinner") as Storyboard;
+            //spinnerStoryboard.Stop();
+            progressRing.IsActive = false;
             infoGrid.Visibility = Visibility.Hidden;
         }
     }

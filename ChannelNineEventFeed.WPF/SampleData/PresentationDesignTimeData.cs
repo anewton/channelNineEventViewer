@@ -69,8 +69,25 @@ namespace ChannelNineEventFeed.WPF.SampleData
                 new Media() { DownloadLink = "Curabitur aenean vestibulum class mauris", MediaType = "Phasellus curae adipiscing", SessionId = 35, IsDownloadInProgress = true },
                 new Media() { DownloadLink = "Curabitur aenean vestibulum class mauris", MediaType = "Phasellus curae adipiscing", SessionId = 35, IsPlayableInMediaElement = true }
             };
+
+            FilterItems = new List<object>()
+            {
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing",
+                "Testing"
+            };
         }
 
         public FlowDocument FlowDocDescription { get; set; }
+
+        public IEnumerable<object> FilterItems { get; set; }
     }
 }

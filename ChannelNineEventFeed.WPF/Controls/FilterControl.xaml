@@ -1,19 +1,41 @@
-﻿<UserControl x:Class="ChannelNineEventFeed.WPF.Controls.FilterControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ChannelNineEventFeed.WPF.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" 
-             d:DesignWidth="300">
-    <Grid x:Name="controlsGrid">
+﻿<UserControl
+    x:Class="ChannelNineEventFeed.WPF.Controls.FilterControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    FontSize="16">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- this window should be blue -->
+                <ResourceDictionary
+                    Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <!-- and should use the light theme -->
+                <ResourceDictionary
+                    Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid
+        x:Name="controlsGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="selectedFiltersIndicator" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="12,0,0,6" />
-        <StackPanel x:Name="filterControlContainer" Orientation="Vertical" Grid.Row="1"  />
+        <TextBlock
+            x:Name="selectedFiltersIndicator"
+            HorizontalAlignment="Left"
+            TextWrapping="Wrap"
+            Margin="12,0,0,6" />
+        <StackPanel
+            x:Name="filterControlContainer"
+            Orientation="Vertical"
+            Grid.Row="1" />
     </Grid>
-    
 </UserControl>

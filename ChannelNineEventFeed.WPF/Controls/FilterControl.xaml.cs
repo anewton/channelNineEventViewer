@@ -53,7 +53,6 @@ namespace ChannelNineEventFeed.WPF.Controls
             UpdateSelectedFiltersIndicator();
         }
 
-
         private void FilterChanged(object sender, Tuple<FilterType, List<object>> e)
         {
             Filtering?.Invoke(this, null);

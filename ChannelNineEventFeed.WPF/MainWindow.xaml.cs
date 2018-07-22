@@ -3,6 +3,7 @@ using ChannelNineEventFeed.Data.Interfaces;
 using ChannelNineEventFeed.Library.Intefaces;
 using ChannelNineEventFeed.Library.Interfaces;
 using ChannelNineEventFeed.Library.Models;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +16,7 @@ using System.Windows.Threading;
 
 namespace ChannelNineEventFeed.WPF
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public static readonly DependencyProperty PresentationDataProperty = DependencyProperty.Register("PresentationData", typeof(List<Presentation>), typeof(MainWindow), new PropertyMetadata(null));
 
@@ -172,6 +173,8 @@ namespace ChannelNineEventFeed.WPF
             ColumnDefinition targetColumn = null;
             if (isLeftGridSplitter)
             {
+                var buttonContent = "Filter Panel";
+                var button = ShowHideFilterPanel;
                 targetColumn = filterPanelColumn;
                 if (targetColumn.Width.Value > 0)
                 {
@@ -180,14 +183,18 @@ namespace ChannelNineEventFeed.WPF
                 if (targetColumn.Width.Value > 0)
                 {
                     targetColumn.Width = new GridLength(0);
+                    button.Content = "Show " + buttonContent;
                 }
                 else
                 {
                     targetColumn.Width = _previousFilterPanelWidth;
+                    button.Content = "Hide " + buttonContent;
                 }
             }
             else
             {
+                var buttonContent = "Queue Panel";
+                var button = ShowHideQueuePanel;
                 targetColumn = queuePanelColumn;
                 if (targetColumn.Width.Value > 5)
                 {
@@ -196,10 +203,12 @@ namespace ChannelNineEventFeed.WPF
                 if (targetColumn.Width.Value > 5)
                 {
                     targetColumn.Width = new GridLength(5);
+                    button.Content = "Show " + buttonContent;
                 }
                 else
                 {
                     targetColumn.Width = _previousQueuePanelWidth;
+                    button.Content = "Hide " + buttonContent;
                 }
             }
         }
@@ -251,7 +260,6 @@ namespace ChannelNineEventFeed.WPF
             var messageBoxResult = MessageBox.Show("Are you sure?", "Delete database and create a new one", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-
                 App.Current.Dispatcher.Invoke(async () =>
                 {
                     filterControl.Reset();
