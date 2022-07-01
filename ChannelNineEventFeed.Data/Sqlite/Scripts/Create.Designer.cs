@@ -19,7 +19,7 @@ namespace ChannelNineEventFeed.Data.Sqlite.Scripts {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Create {
@@ -98,7 +98,13 @@ namespace ChannelNineEventFeed.Data.Sqlite.Scripts {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `QueuedPresentation` (
+        ///    `Id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///    `Created` DATETIME NULL,
+        ///    `LastUpdated` DATETIME NULL,
+        ///    `Title` NVARCHAR(256) NULL,
+        ///    `OrderIndex` INTEGER NOT NULL
+        ///);.
         /// </summary>
         internal static string QueuedPresentation {
             get {
