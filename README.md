@@ -1,5 +1,10 @@
 # Channel Nine Event Viewer
 
+### UPDATE: [Channel 9 is now part of Microsoft Learn](https://docs.microsoft.com/en-us/teamblog/learntvannouncement).  This application no longer works because the events RSS feed Url is no longer available.
+### Please go to https://docs.microsoft.com/en-us/events to be able to locate old Event content.
+### This project will be decommissioned.
+
+
 A Channel 9 Event RSS feed service interpreter that stores feed data locally and has a simple user interface for viewing or linking to presentation media.  Useful for downloading videos for offline viewing.  Configurable to support most events listed at https://channel9.msdn.com/Browse/Events.
 
 #### Basic Use
